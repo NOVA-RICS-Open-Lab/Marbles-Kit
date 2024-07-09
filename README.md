@@ -29,6 +29,7 @@ Esp32 NUMBER 2
 Responsible for:
 
 T2 - Feeder for G3 / G2
+
 G2 - Station 2
 
 Settings:
@@ -39,6 +40,7 @@ HTTP POST with param "skill" with the wanted skill.
 Available skills:
 
 "RESET"
+
 "GRAB"      
 "RELEASE"   
 "MOVEG2G1"  
