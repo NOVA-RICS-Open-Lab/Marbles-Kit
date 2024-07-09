@@ -72,7 +72,7 @@ void SetupWiFi() {
 void setup() {
   Serial.begin(115200);
   SetupPorts();
-  ResetToDefault();
+  Calibrate();
   SetupWiFi();
 }
 
@@ -98,7 +98,7 @@ void handlePost() {
   } else if (message == SKILL3) {
     Skill_Manager(3, message);
   } else if (message == SKILL4) {
-    Skill_Manager(4, message);;
+    Skill_Manager(4, message);
   } else if (message == SKILL5) {
     Skill_Manager(5, message);
   } else {
@@ -109,7 +109,7 @@ void handlePost() {
 void Skill_Manager(int skillRequest, String message) {
   switch (skillRequest) {
     case 0:
-      ResetToDefault();
+      Calibrate();
       server.send(200, "text/plain", "Skill " + message + " done");
       break;
     case 1:
@@ -185,7 +185,7 @@ void UpG1() {
 //
 //*********************************************************************************************
 
-void ResetToDefault() {
+void Calibrate() {
   SpinT1(true);
   UpG1();
   CloseG1();
