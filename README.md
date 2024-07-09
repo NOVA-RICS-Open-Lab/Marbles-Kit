@@ -9,13 +9,16 @@ G1 - Station 1
 Settings:
 
 IP: http://192.168.250.180:8009/berlindes/
-HTTP POST with param "skill" with the wanted skill.
 
 Available skills:
 
 "RESET" "GRAB" "RELEASE" "FEEDT1" "FEEDG1"
 
 "TOTAL" //main skill
+
+How to use:
+
+HTTP POST with param "skill" with the wanted skill. 
 
 Example Post: http://192.168.250.180:8009/berlindes/?skill=TOTAL
 
@@ -31,13 +34,16 @@ G2 - Station 2
 Settings:
 
 IP: http://192.168.250.181:8009/berlindes/
-HTTP POST with param "skill" with the wanted skill.
 
 Available skills:
 
 "RESET" "GRAB" "RELEASE" "MOVEG2G1" "MOVEG2T2" "MOVET2G2" "MOVET2G3"  
 
 "TOTAL" //main skill
+
+How to use:
+
+HTTP POST with param "skill" with the wanted skill. 
 
 Example Post: http://192.168.250.181:8009/berlindes/?skill=TOTAL
 
@@ -51,12 +57,15 @@ G3 - Station 3
 Settings:
 
 IP: http://192.168.250.182:8009/berlindes/
-HTTP POST with param "skill" with the wanted skill.
 
 Available skills:
 
 "RESET"
 "GRAB"
 "RELEASE"
+
+How to use:
+
+HTTP POST with param "skill" with the wanted skill. 
 
 Example Post: http://192.168.250.182:8009/berlindes/?skill=GRAB
