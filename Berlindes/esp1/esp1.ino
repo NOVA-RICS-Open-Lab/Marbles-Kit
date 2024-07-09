@@ -1,3 +1,6 @@
+#include <WiFi.h>
+#include <WebServer.h>
+
 #define ATUADOR_1 23
 #define ATUADOR_2 22
 #define ATUADOR_3 21
@@ -6,14 +9,143 @@
 #define ATUADOR_6 5
 #define ATUADOR_7 17
 
+#define DELAY_MAQUINA_1 200
+#define DELAY_MAQUINA_2 2000
+
+#define SKILL0 "RESET"
+#define SKILL1 "GRAB"
+#define SKILL2 "RELEASE"
+#define SKILL3 "FEEDT1"
+#define SKILL4 "FEEDG1"
+#define SKILL5 "TOTAL"
+
+#define SSID "RICS-PUB"
+#define PASSWORD "ricsricsjabjab"
+
+IPAddress local_IP(192, 168, 2, 69);  // Set your Static IP address
+IPAddress gateway(192, 168, 1, 1);    // Set your Gateway IP address
+IPAddress subnet(255, 255, 0, 0);
+
+WebServer server(8009);
+
+void SetupPorts() {
+  ///////////////////////////////////////////////
+  //Inicializar os portos
+  //Input
+  pinMode(ATUADOR_1, OUTPUT);
+  pinMode(ATUADOR_2, OUTPUT);
+  pinMode(ATUADOR_3, OUTPUT);
+  pinMode(ATUADOR_4, OUTPUT);
+  pinMode(ATUADOR_5, OUTPUT);
+  pinMode(ATUADOR_6, OUTPUT);
+  pinMode(ATUADOR_7, OUTPUT);
+}
+
+void SetupWiFi() {
+  /*
+  if (!WiFi.config(local_IP, gateway, subnet)) {
+    Serial.println("Erro a configurar IP estático");
+  }
+  */
+
+  WiFi.setSleep(WIFI_PS_NONE);
+
+  WiFi.begin(SSID, PASSWORD);
+  Serial.print("Connecting to WiFi");
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(100);
+    Serial.print(".");
+  }
+
+  Serial.println("\nWiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+
+  server.on("/berlindes/", HTTP_POST, handlePost);
+  server.onNotFound(handleNotFound);
+
+  server.begin();
+  Serial.println("HTTP server started");
+}
+
 void setup() {
-  skillG1();
+  Serial.begin(115200);
+  SetupPorts();
+  ResetToDefault();
+  SetupWiFi();
 }
 
 void loop() {
+  delay(10);
+}
+//////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////// HTTP Requests /////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+void handlePost() {
+
+  String message = "";
+  if (server.hasArg("skill")) {
+    message = server.arg("skill");
+  }
+
+  if (message == SKILL0) {
+    Skill_Manager(0, message);
+  } else if (message == SKILL1) {
+    Skill_Manager(1, message);
+  } else if (message == SKILL2) {
+    Skill_Manager(2, message);
+  } else if (message == SKILL3) {
+    Skill_Manager(3, message);
+  } else if (message == SKILL4) {
+    Skill_Manager(4, message);;
+  } else if (message == SKILL5) {
+    Skill_Manager(5, message);
+  } else {
+    server.send(200, "text/plain", "Skill " + message + " not found");
+  }
 }
 
-void spinT1(bool horario) {
+void Skill_Manager(int skillRequest, String message) {
+  switch (skillRequest) {
+    case 0:
+      ResetToDefault();
+      server.send(200, "text/plain", "Skill " + message + " done");
+      break;
+    case 1:
+      SkillGrabG1();
+      server.send(200, "text/plain", "Skill " + message + " done");
+      break;
+    case 2:
+      SkillReleaseG1();
+      server.send(200, "text/plain", "Skill " + message + " done");
+      break;
+    case 3:
+      SkillFeedT1();
+      server.send(200, "text/plain", "Skill " + message + " done");
+      break;
+    case 4:
+      SkillT1FeedG1();
+      server.send(200, "text/plain", "Skill " + message + " done");
+      break;
+    case 5:
+      SkillTotal();
+      server.send(200, "text/plain", "Skill " + message + " done");
+      break;
+  }
+}
+
+void handleNotFound() {
+  server.send(404, "text/plain", "POST REQUEST NOT FOUND");
+}
+
+//*********************************************************************************************
+//
+// T1 
+//
+//*********************************************************************************************
+
+void SpinT1(bool horario) {
   if (horario) {
     digitalWrite(ATUADOR_2, LOW);
     digitalWrite(ATUADOR_1, HIGH);
@@ -22,38 +154,75 @@ void spinT1(bool horario) {
     digitalWrite(ATUADOR_2, HIGH);
   }
 }
-void stopT1() {
+void StopT1() {
   digitalWrite(ATUADOR_1, LOW);
   digitalWrite(ATUADOR_2, LOW);
 }
 
-void openG1() {
+//*********************************************************************************************
+//
+// G1
+//
+//*********************************************************************************************
+
+void OpenG1() {
   digitalWrite(ATUADOR_3, HIGH);
 }
-void closeG1() {
+void CloseG1() {
   digitalWrite(ATUADOR_3, LOW);
 }
 
-void downG1() {
+void DownG1() {
   digitalWrite(ATUADOR_4, HIGH);
 }
-void upG1() {
+void UpG1() {
   digitalWrite(ATUADOR_4, LOW);
 }
 
+//*********************************************************************************************
+//
+// Skills
+//
+//*********************************************************************************************
 
-void skillG1() {
-  spinT1(false);
-  delay(100);
-  
-  openG1();
-  downG1();
-  delay(100);
-  closeG1();
-  upG1();
-  delay(100);
+void ResetToDefault() {
+  SpinT1(true);
+  UpG1();
+  CloseG1();
+}
 
-  spinT1(true);
-  downG1();
-  openG1();
+void SkillGrabG1() {
+  OpenG1();
+  DownG1();
+  delay(DELAY_MAQUINA_2);
+  CloseG1();
+  delay(DELAY_MAQUINA_1);
+  UpG1();
+}
+
+void SkillReleaseG1(){
+  DownG1();
+  delay(DELAY_MAQUINA_2);
+  OpenG1();
+  delay(DELAY_MAQUINA_2);
+  CloseG1();
+  delay(DELAY_MAQUINA_1);
+  UpG1();
+}
+
+void SkillFeedT1() {
+  SpinT1(true);
+  delay(DELAY_MAQUINA_2);  
+}
+
+void SkillT1FeedG1() {
+  SpinT1(false);
+  delay(DELAY_MAQUINA_2);
+}
+
+void SkillTotal() {
+  SkillT1FeedG1();
+  SkillGrabG1();
+  SkillFeedT1();
+  SkillReleaseG1();
 }
