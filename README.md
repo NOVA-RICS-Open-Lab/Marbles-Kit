@@ -13,11 +13,7 @@ HTTP POST with param "skill" with the wanted skill.
 
 Available skills:
 
-"RESET"
-"GRAB" 
-"RELEASE"
-"FEEDT1"
-"FEEDG1"
+"RESET" "GRAB" "RELEASE" "FEEDT1" "FEEDG1"
 
 "TOTAL" //main skill
 
@@ -39,14 +35,7 @@ HTTP POST with param "skill" with the wanted skill.
 
 Available skills:
 
-"RESET"
-
-"GRAB"      
-"RELEASE"   
-"MOVEG2G1"  
-"MOVEG2T2"  
-"MOVET2G2"  
-"MOVET2G3"  
+"RESET" "GRAB" "RELEASE" "MOVEG2G1" "MOVEG2T2" "MOVET2G2" "MOVET2G3"  
 
 "TOTAL" //main skill
 
