@@ -12,17 +12,18 @@
 #define DELAY_MAQUINA_1 200
 #define DELAY_MAQUINA_2 2000
 
+
 #define SKILL0 "RESET"
-#define SKILL1 "GRAB"
-#define SKILL2 "RELEASE"
+#define SKILL1 "GRAB" //chupar ( ͡° ͜ʖ ͡°)
+#define SKILL2 "RELEASE" //hawk tuah
 #define SKILL3 "FEEDT1"
 #define SKILL4 "FEEDG1"
-#define SKILL5 "TOTAL"
+#define SKILL5 "TOTAL" //fazer todo o loop
 
 #define SSID "RICS-PUB"
 #define PASSWORD "ricsricsjabjab"
 
-IPAddress local_IP(192, 168, 2, 69);  // Set your Static IP address
+IPAddress local_IP(192, 168, 2, 180);  // Set your Static IP address
 IPAddress gateway(192, 168, 1, 1);    // Set your Gateway IP address
 IPAddress subnet(255, 255, 0, 0);
 
@@ -42,13 +43,12 @@ void SetupPorts() {
 }
 
 void SetupWiFi() {
-  /*
+  
   if (!WiFi.config(local_IP, gateway, subnet)) {
     Serial.println("Erro a configurar IP estático");
   }
-  */
 
-  WiFi.setSleep(WIFI_PS_NONE);
+  //WiFi.setSleep(WIFI_PS_NONE);
 
   WiFi.begin(SSID, PASSWORD);
   Serial.print("Connecting to WiFi");
@@ -77,7 +77,8 @@ void setup() {
 }
 
 void loop() {
-  delay(10);
+  server.handleClient();
+  delay(1);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// HTTP Requests /////////////////////////////////
@@ -136,7 +137,7 @@ void Skill_Manager(int skillRequest, String message) {
 }
 
 void handleNotFound() {
-  server.send(404, "text/plain", "POST REQUEST NOT FOUND");
+  server.send(200, "text/plain", "POST REQUEST NOT FOUND");
 }
 
 //*********************************************************************************************

@@ -25,11 +25,11 @@
 #define SSID "RICS-PUB"
 #define PASSWORD "ricsricsjabjab"
 
-IPAddress local_IP(192, 168, 2, 70);  // Set your Static IP address
+IPAddress local_IP(192, 168, 2, 181);  // Set your Static IP address
 IPAddress gateway(192, 168, 1, 1);    // Set your Gateway IP address
 IPAddress subnet(255, 255, 0, 0);
 
-WebServer server(8009);
+WebServer server(8010);
 
 void SetupPorts() {
   ///////////////////////////////////////////////
@@ -45,13 +45,11 @@ void SetupPorts() {
 }
 
 void SetupWiFi() {
-  /*
   if (!WiFi.config(local_IP, gateway, subnet)) {
     Serial.println("Erro a configurar IP estático");
   }
-  */
 
-  WiFi.setSleep(WIFI_PS_NONE);
+  //WiFi.setSleep(WIFI_PS_NONE);
 
   WiFi.begin(SSID, PASSWORD);
   Serial.print("Connecting to WiFi");
@@ -80,7 +78,8 @@ void setup() {
 }
 
 void loop() {
-  delay(10);
+  server.handleClient();
+  delay(1);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -152,7 +151,7 @@ void Skill_Manager(int skillRequest, String message) {
 }
 
 void handleNotFound() {
-  server.send(404, "text/plain", "POST REQUEST NOT FOUND");
+  server.send(200, "text/plain", "POST REQUEST NOT FOUND");
 }
 
 //*********************************************************************************************
