@@ -69,3 +69,9 @@ IP: http://192.168.250.182:8009/berlindes/
 HTTP POST with param "skill" with the wanted skill. 
 
 **Example Post:** http://192.168.250.182:8009/berlindes/?skill=GRAB
+
+*************
+Python
+
+In order to rub python the requests module is needed:
+$ python -m pip install requests
