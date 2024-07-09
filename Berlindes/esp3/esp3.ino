@@ -72,7 +72,8 @@ void setup() {
 }
 
 void loop() {
-  delay(10);
+  server.handleClient();
+  delay(1);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -161,12 +162,12 @@ void upG3() {
 //
 //*********************************************************************************************
 void Calibrate(){
-  spinG3(false);
+  spinG3(true);
   openG3();
   upG3();
 }
+
 void SkillGrabG3() {
-  //TENS QUE TESTAR ESTES DELAYS!
   spinG3(true);
   delay(DELAY_MAQUINA_2);
   openG3();
@@ -180,8 +181,9 @@ void SkillGrabG3() {
 }
 
 void SkillReleaseG3(){
-  //TENS QUE TESTAR ESTES DELAYS!
   spinG3(false);
   delay(DELAY_MAQUINA_2);
   openG3();
+  delay(DELAY_MAQUINA_2);
+  spinG3(true);
 }
