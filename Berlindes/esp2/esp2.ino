@@ -11,7 +11,7 @@
 
 #define DELAY_MAQUINA_1 200
 #define DELAY_MAQUINA_2 2000
-#define DELAY_MAQUINA_MOVE 10000
+#define DELAY_MAQUINA_MOVE 5000
 
 #define SKILL0 "RESET"
 #define SKILL1 "GRAB"      //chupar ( ͡° ͜ʖ ͡°)
@@ -25,11 +25,11 @@
 #define SSID "RICS-PUB"
 #define PASSWORD "ricsricsjabjab"
 
-IPAddress local_IP(192, 168, 2, 181);  // Set your Static IP address
+IPAddress local_IP(192, 168, 250, 181);  // Set your Static IP address
 IPAddress gateway(192, 168, 1, 1);    // Set your Gateway IP address
 IPAddress subnet(255, 255, 0, 0);
 
-WebServer server(8010);
+WebServer server(8009);
 
 void SetupPorts() {
   ///////////////////////////////////////////////
@@ -221,30 +221,30 @@ void SkillGrabG2() {
 
 void SkillMoveG2T2() {
   frontG2();
-  delay(DELAY_MAQUINA_MOVE);  //ISTO DEVE PRECISAR DE MAIS TEMPO!!!
+  delay(DELAY_MAQUINA_MOVE); 
 }
 
 void SkillMoveG2G1() {
   backG2();
-  delay(DELAY_MAQUINA_MOVE);  //ISTO DEVE PRECISAR DE MAIS TEMPO!!!
+  delay(DELAY_MAQUINA_MOVE);
 }
 
 void SkillReleaseG2() {
   downG2();
   delay(DELAY_MAQUINA_2);
   unsuckG2();
-  delay(DELAY_MAQUINA_2);
+  delay(DELAY_MAQUINA_1);
   upG2();
 }
 
 void SkillMoveT2G2() {
   leftT2();
-  delay(DELAY_MAQUINA_1);
+  delay(DELAY_MAQUINA_3);
 }
 
 void SkillMoveT2G3() {
   rightT2();
-  delay(DELAY_MAQUINA_1);
+  delay(DELAY_MAQUINA_3);
 }
 
 void SkillTotal() {
