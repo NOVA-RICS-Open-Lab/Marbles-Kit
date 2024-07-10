@@ -73,5 +73,5 @@ HTTP POST with param "skill" with the wanted skill.
 *************
 Python
 
-In order to rub python the requests module is needed:
+In order to run python the requests module is needed:
 $ python -m pip install requests
