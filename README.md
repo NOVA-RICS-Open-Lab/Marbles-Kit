@@ -50,7 +50,8 @@ Follow these steps to set up your ESP:
    ```
    There are the specified ports used for the actuators, who need to be setup as Outputs.
    - WiFi configuration
-   The SSID and Password for the wifi network also need to be specified along with his static IP. ESP code lack this elements
+  
+      The SSID and Password for the wifi network also need to be specified along with his static IP. ESP code lack this elements
 
 3. **Gather Components**
    - The test was conducted using an ESP32 DEVKIT V1.
