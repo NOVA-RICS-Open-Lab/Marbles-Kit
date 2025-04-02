@@ -11,21 +11,19 @@
 
 #define DELAY_MAQUINA_1 200
 #define DELAY_MAQUINA_2 2000
-#define DELAY_MAQUINA_MOVE 5000
+
 
 #define SKILL0 "RESET"
-#define SKILL1 "GRAB"      //chupar ( ͡° ͜ʖ ͡°)
-#define SKILL2 "RELEASE"   //hawk tuah
-#define SKILL3 "MOVEG2G1"  //mover G2 para G1
-#define SKILL4 "MOVEG2T2"  //mover G2 para T2
-#define SKILL5 "MOVET2G2"  //mover T2 para G2
-#define SKILL6 "MOVET2G3"  //mover T2 para G3
-#define SKILL7 "TOTAL"     //fazer todo o loop
+#define SKILL1 "GRAB" //chupar ( ͡° ͜ʖ ͡°)
+#define SKILL2 "RELEASE" //hawk tuah
+#define SKILL3 "FEEDT1"
+#define SKILL4 "FEEDG1"
+#define SKILL5 "TOTAL" //fazer todo o loop
 
-#define SSID "RICS-PUB"
-#define PASSWORD "ricsricsjabjab"
+#define SSID ""
+#define PASSWORD ""
 
-IPAddress local_IP(192, 168, 13, 2);  // Set your Static IP address
+IPAddress local_IP(192, 168, 1, 1);  // Set your Static IP address
 IPAddress gateway(192, 168, 1, 1);    // Set your Gateway IP address
 IPAddress subnet(255, 255, 0, 0);
 
@@ -45,6 +43,7 @@ void SetupPorts() {
 }
 
 void SetupWiFi() {
+  
   if (!WiFi.config(local_IP, gateway, subnet)) {
     Serial.println("Erro a configurar IP estático");
   }
@@ -81,7 +80,6 @@ void loop() {
   server.handleClient();
   delay(1);
 }
-
 //////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// HTTP Requests /////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,10 +102,6 @@ void handlePost() {
     Skill_Manager(4, message);
   } else if (message == SKILL5) {
     Skill_Manager(5, message);
-  } else if (message == SKILL6) {
-    Skill_Manager(6, message);
-  } else if (message == SKILL7) {
-    Skill_Manager(7, message);
   } else {
     server.send(200, "text/plain", "Skill " + message + " not found");
   }
@@ -120,30 +114,22 @@ void Skill_Manager(int skillRequest, String message) {
       server.send(200, "text/plain", "Skill " + message + " done");
       break;
     case 1:
-      SkillGrabG2();
+      SkillGrabG1();
       server.send(200, "text/plain", "Skill " + message + " done");
       break;
     case 2:
-      SkillReleaseG2();
+      SkillReleaseG1();
       server.send(200, "text/plain", "Skill " + message + " done");
       break;
     case 3:
-      SkillMoveG2G1();
+      SkillFeedT1();
       server.send(200, "text/plain", "Skill " + message + " done");
       break;
     case 4:
-      SkillMoveG2T2();
+      SkillT1FeedG1();
       server.send(200, "text/plain", "Skill " + message + " done");
       break;
     case 5:
-      SkillMoveT2G2();
-      server.send(200, "text/plain", "Skill " + message + " done");
-      break;
-    case 6:
-      SkillMoveT2G3();
-      server.send(200, "text/plain", "Skill " + message + " done");
-      break;
-    case 7:
       SkillTotal();
       server.send(200, "text/plain", "Skill " + message + " done");
       break;
@@ -156,46 +142,42 @@ void handleNotFound() {
 
 //*********************************************************************************************
 //
-// G2
+// T1 
 //
 //*********************************************************************************************
-void frontG2() {
-  digitalWrite(ATUADOR_1, HIGH);
-}
-void backG2() {
-  digitalWrite(ATUADOR_1, LOW);
-}
 
-void downG2() {
-  digitalWrite(ATUADOR_2, HIGH);
+void SpinT1(bool horario) {
+  if (horario) {
+    digitalWrite(ATUADOR_2, LOW);
+    digitalWrite(ATUADOR_1, HIGH);
+  } else {
+    digitalWrite(ATUADOR_1, LOW);
+    digitalWrite(ATUADOR_2, HIGH);
+  }
 }
-void upG2() {
+void StopT1() {
+  digitalWrite(ATUADOR_1, LOW);
   digitalWrite(ATUADOR_2, LOW);
 }
 
-void stopInTheMiddle(bool toggle) {
-  digitalWrite(ATUADOR_3, toggle);
-}
-
-void suckG2() {
-  digitalWrite(ATUADOR_6, HIGH);
-}
-void unsuckG2() {
-  digitalWrite(ATUADOR_6, LOW);
-}
-
 //*********************************************************************************************
 //
-// T2
+// G1
 //
 //*********************************************************************************************
-void leftT2() {
-  digitalWrite(ATUADOR_5, LOW);
+
+void OpenG1() {
+  digitalWrite(ATUADOR_3, HIGH);
+}
+void CloseG1() {
+  digitalWrite(ATUADOR_3, LOW);
+}
+
+void DownG1() {
   digitalWrite(ATUADOR_4, HIGH);
 }
-void rightT2() {
+void UpG1() {
   digitalWrite(ATUADOR_4, LOW);
-  digitalWrite(ATUADOR_5, HIGH);
 }
 
 //*********************************************************************************************
@@ -205,53 +187,43 @@ void rightT2() {
 //*********************************************************************************************
 
 void Calibrate() {
-  rightT2();
-  unsuckG2();
-  upG2();
-  backG2();
+  SpinT1(true);
+  UpG1();
+  CloseG1();
 }
 
-void SkillGrabG2() {
-  downG2();
+void SkillGrabG1() {
+  OpenG1();
+  DownG1();
   delay(DELAY_MAQUINA_2);
-  suckG2();
+  CloseG1();
   delay(DELAY_MAQUINA_1);
-  upG2();
+  UpG1();
 }
 
-void SkillMoveG2T2() {
-  frontG2();
-  delay(DELAY_MAQUINA_MOVE); 
-}
-
-void SkillMoveG2G1() {
-  backG2();
-  delay(DELAY_MAQUINA_MOVE);
-}
-
-void SkillReleaseG2() {
-  downG2();
+void SkillReleaseG1(){
+  DownG1();
   delay(DELAY_MAQUINA_2);
-  unsuckG2();
+  OpenG1();
+  delay(DELAY_MAQUINA_2);
+  CloseG1();
   delay(DELAY_MAQUINA_1);
-  upG2();
+  UpG1();
 }
 
-void SkillMoveT2G2() {
-  leftT2();
-  delay(DELAY_MAQUINA_2);
+void SkillFeedT1() {
+  SpinT1(true);
+  delay(DELAY_MAQUINA_2);  
 }
 
-void SkillMoveT2G3() {
-  rightT2();
+void SkillT1FeedG1() {
+  SpinT1(false);
   delay(DELAY_MAQUINA_2);
 }
 
 void SkillTotal() {
-  SkillGrabG2();
-  SkillMoveG2T2();
-  SkillMoveT2G2();
-  SkillReleaseG2();
-  SkillMoveT2G3();
-  SkillMoveG2G1();
+  SkillT1FeedG1();
+  SkillGrabG1();
+  SkillFeedT1();
+  SkillReleaseG1();
 }

@@ -38,6 +38,20 @@ Follow these steps to set up your ESP:
         - WiFi.h
         - WebServer.h
      All these librarys come insisde the [ESP's board package from expressif](https://github.com/espressif/arduino-esp32)
+   - Pins and Ports
+   ```bibtex
+   #define ATUADOR_1 23
+   #define ATUADOR_2 22
+   #define ATUADOR_3 21
+   #define ATUADOR_4 19
+   #define ATUADOR_5 18
+   #define ATUADOR_6 5
+   #define ATUADOR_7 17
+   ```
+   There are the specified ports used for the actuators, who need to be setup as Outputs.
+   - WiFi configuration
+   The SSID and Password for the wifi network also need to be specified along with his static IP. ESP code lack this elements
+
 3. **Gather Components**
    - The test was conducted using an ESP32 DEVKIT V1.
 
@@ -147,16 +161,12 @@ http://192.168.13.3:8009/berlindes/?skill=GRAB
 ### Project Structure
 For you to better understand this repository organization here is a quick overview of its structure and where to find what you might be looking for:
 ```
-open-modular-controller
-├── docs                # documentation assets
-│   ├── circuits            # digital and analog circuit study
-│   ├── pcb                 # pcb assets and materials
-│   └── thesis.pdf          # master thesis
+Marbles-Kit
 ├── imgs                # images from this project
-├── src                 # evaluation code
-│   ├── libs                # developed libraries
-│   └── protoboardValid.ino         # validation circuit
-└── tests               # use case example scripts
+└── src                 # evaluation code
+    ├── esp1                # developed code
+    ├── esp3                # developed code
+    └── esp4                # developed code
 ```
 
 ## <div align="center">Documentation</div>
