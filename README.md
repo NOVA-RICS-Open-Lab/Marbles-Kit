@@ -8,7 +8,7 @@ G1 - Station 1
 
 **Settings:**
 
-IP: http://192.168.250.180:8009/berlindes/
+IP: http://192.168.13.1:8009/berlindes/
 
 **Available skills:**
 
@@ -20,7 +20,7 @@ IP: http://192.168.250.180:8009/berlindes/
 
 HTTP POST with param "skill" with the wanted skill. 
 
-**Example Post:** http://192.168.250.180:8009/berlindes/?skill=TOTAL
+**Example Post:** http://192.168.13.1:8009/berlindes/?skill=TOTAL
 
 *************
 ## Esp32 NUMBER 2
@@ -33,7 +33,7 @@ G2 - Station 2
 
 **Settings:**
 
-IP: http://192.168.250.181:8009/berlindes/
+IP: http://192.168.13.2:8009/berlindes/
 
 **Available skills:**
 
@@ -45,7 +45,7 @@ IP: http://192.168.250.181:8009/berlindes/
 
 HTTP POST with param "skill" with the wanted skill. 
 
-**Example Post:** http://192.168.250.181:8009/berlindes/?skill=TOTAL
+**Example Post:** http://192.168.13.2:8009/berlindes/?skill=TOTAL
 
 *************
 ## Esp32 NUMBER 3
@@ -56,7 +56,7 @@ G3 - Station 3
 
 **Settings:**
 
-IP: http://192.168.250.182:8009/berlindes/
+IP: http://192.168.13.3:8009/berlindes/
 
 **Available skills:**
 
@@ -68,7 +68,7 @@ IP: http://192.168.250.182:8009/berlindes/
 
 HTTP POST with param "skill" with the wanted skill. 
 
-**Example Post:** http://192.168.250.182:8009/berlindes/?skill=GRAB
+**Example Post:** http://192.168.13.3:8009/berlindes/?skill=GRAB
 
 *************
 Python

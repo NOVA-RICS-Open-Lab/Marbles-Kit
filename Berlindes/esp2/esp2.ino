@@ -25,7 +25,7 @@
 #define SSID "RICS-PUB"
 #define PASSWORD "ricsricsjabjab"
 
-IPAddress local_IP(192, 168, 250, 181);  // Set your Static IP address
+IPAddress local_IP(192, 168, 13, 2);  // Set your Static IP address
 IPAddress gateway(192, 168, 1, 1);    // Set your Gateway IP address
 IPAddress subnet(255, 255, 0, 0);
 
@@ -239,12 +239,12 @@ void SkillReleaseG2() {
 
 void SkillMoveT2G2() {
   leftT2();
-  delay(DELAY_MAQUINA_3);
+  delay(DELAY_MAQUINA_2);
 }
 
 void SkillMoveT2G3() {
   rightT2();
-  delay(DELAY_MAQUINA_3);
+  delay(DELAY_MAQUINA_2);
 }
 
 void SkillTotal() {

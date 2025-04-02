@@ -23,7 +23,7 @@
 #define SSID "RICS-PUB"
 #define PASSWORD "ricsricsjabjab"
 
-IPAddress local_IP(192, 168, 250, 180);  // Set your Static IP address
+IPAddress local_IP(192, 168, 13, 1);  // Set your Static IP address
 IPAddress gateway(192, 168, 1, 1);    // Set your Gateway IP address
 IPAddress subnet(255, 255, 0, 0);
 
