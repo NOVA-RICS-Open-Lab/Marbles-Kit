@@ -10,10 +10,11 @@ Lisbon, 2829-516 Lisbon, Portugal
 <table>
   <tr>
     <td style="vertical-align: top;">
-      This work proposes the development of a control system for an industrial marble transportation machine using [open-modular-controllers](https://github.com/NOVA-RICS-Open-Lab/open-modular-controller).
+      This work proposes the development of a control system for an industrial marble transportation machine using 
+      <a href="https://github.com/NOVA-RICS-Open-Lab/open-modular-controller">open-modular-controllers</a>.
     </td>
     <td style="vertical-align: top;">
-      <img style="width: 1100px" src="imgs/pcb.jpg" alt="pcb" width="200"/>
+      <img style="width: 1100px" src="imgs/pcb.jpg" alt="PCB" width="200"/>
     </td>
   </tr>
 </table>
@@ -28,15 +29,15 @@ Follow these steps to set up your ESP:
 
 2. **Dependencies**
    - Python
-   - In order to run python the requests module is needed:
+     In order to run python the requests module is needed:
     ```bibtex
     $ python -m pip install requests
     ```
    - Arduino
-   - In order to implement http services you will need 2 Librarys:
-    - WiFi.h
-    - WebServer.h
-   - All these librarys come insisde the [ESP's board package from expressif](https://github.com/espressif/arduino-esp32)
+     In order to implement http services you will need 2 Librarys:
+        - WiFi.h
+        - WebServer.h
+     All these librarys come insisde the [ESP's board package from expressif](https://github.com/espressif/arduino-esp32)
 3. **Gather Components**
    - The test was conducted using an ESP32 DEVKIT V1.
 
@@ -44,9 +45,10 @@ Follow these steps to set up your ESP:
    - Each controller board is able to support 7 actuators and 7 sensors, having this in mind, define how many controllers you will need and what services you want them to provide.
    - Once you have identified the services, you can code their handlers using as example the code snipet below.
 
-   ```bibtex
-    server.on("/HEADER/", HTTP_MESSAGE_TYPE, HANDLER_FUNCTION);
-    ```
+    ```bibtex
+        server.on("/HEADER/", HTTP_MESSAGE_TYPE, HANDLER_FUNCTION);
+        ```
+   
    - More on this can be found on any ESP32 code provided.
 
 
@@ -80,8 +82,10 @@ IP: http://192.168.13.1:8009/berlindes/
 **How to use:**
 
 HTTP POST with param "skill" with the wanted skill. 
+
+**Example Post:** 
 ```bibtex
-**Example Post:** http://192.168.13.1:8009/berlindes/?skill=TOTAL
+http://192.168.13.1:8009/berlindes/?skill=TOTAL
 ```
 
 *************
