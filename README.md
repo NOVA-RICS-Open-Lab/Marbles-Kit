@@ -62,17 +62,15 @@ Follow these steps to set up your ESP:
 
     ```bibtex
         server.on("/HEADER/", HTTP_MESSAGE_TYPE, HANDLER_FUNCTION);
-        ```
+    ```
    
-   - More on this can be found on any ESP32 code provided.
+      More on this can be found on any ESP32 code provided.
 
 
 5. **Test Services**
    - Test your Services using a browser or any other application. (We recomend Postman)
 
 If everything goes well, congratulations! You have implemented a functional services based industrial system.
-
----
 
 ### Implementation Description
 For our case in particular, we used 3 Controllers that provide the services described below.
@@ -157,8 +155,6 @@ HTTP POST with param "skill" with the wanted skill.
 http://192.168.13.3:8009/berlindes/?skill=GRAB
 ```
 
-*************
-
 ### Project Structure
 For you to better understand this repository organization here is a quick overview of its structure and where to find what you might be looking for:
 ```
@@ -169,12 +165,6 @@ Marbles-Kit
     ├── esp3                # developed code
     └── esp4                # developed code
 ```
-
-## <div align="center">Documentation</div>
-The [docs](./docs/) directory contains extensive resources, including schematics, materials lists, and PCB files, as well as the original master’s dissertation that inspired this project. Explore this folder to access all necessary assets for building, assembling, and understanding the hardware.
-
-The presented use case for the protoboard validation showcases an asynchronous Web Server, providing a more stable connection than a synchronous web server. A toggle switch sends an HTTP request to the Processing Unit Module, initiating movement in the Kit. When the switch is active, it enables continuous operation of the Kit's process. Upon deactivation, the Industrial Kit halts movement at the start of the next cycle.
-
 ## <div align="center">Contribution Guidelines</div>
 NOVA RICS Open Lab open source, and we welcome contributions from the community! See the [Contribution](CONTRIBUTING.md) guide for more information on the development workflow and the internals of the wandb library. For project related bugs and feature requests, visit [GitHub Issues](https://github.com/NOVA-RICS-Open-Lab/open-modular-controller/issues) or contact novaricsopenlab@gmail.com
 
