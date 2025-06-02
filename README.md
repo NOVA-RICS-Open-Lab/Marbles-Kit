@@ -1,24 +1,13 @@
 <div  align="center"> 
 
-# Open Modular Controller for Automation Technologies
+# Marbles Kit
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
 <sup>1</sup> **NOVA School of Science and Technology, Center of Technology and Systems (UNINOVA-CTS)**,
 and Associated Lab of Intelligent Systems (LASI), NOVA University
 Lisbon, 2829-516 Lisbon, Portugal
 
-<table>
-  <tr>
-    <td style="vertical-align: top;">
-      This work proposes the development of a control system for an industrial marble transportation machine using 
-      <a href="https://github.com/NOVA-RICS-Open-Lab/open-modular-controller">open-modular-controllers</a>.
-    </td>
-    <td style="vertical-align: top;">
-      <img style="width: 1100px" src="imgs/pcb.jpg" alt="PCB" width="200"/>
-    </td>
-  </tr>
-</table>
-
+This work proposes the development of a control system for an industrial marble transportation machine using 
 </div>
 
 ## <div align="center">Get Started</div>
