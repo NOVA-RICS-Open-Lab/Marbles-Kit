@@ -7,7 +7,7 @@
 and Associated Lab of Intelligent Systems (LASI), NOVA University
 Lisbon, 2829-516 Lisbon, Portugal
 
-This work proposes the development of a control system for an industrial marble transportation machine using 
+This work proposes the development of a control system for an industrial marble transportation machine using esp32 based [open modular controllers](https://github.com/NOVA-RICS-Open-Lab/open-modular-controller).
 </div>
 
 ## <div align="center">Get Started</div>
@@ -148,11 +148,14 @@ http://192.168.13.3:8009/berlindes/?skill=GRAB
 For you to better understand this repository organization here is a quick overview of its structure and where to find what you might be looking for:
 ```
 Marbles-Kit
-├── imgs                # images from this project
-└── src                 # evaluation code
-    ├── esp1                # developed code
-    ├── esp3                # developed code
-    └── esp4                # developed code
+├── imgs                            # images from this project
+└── src                             # evaluation code
+    ├── arduino                           # arduino code for the esp32 
+    │   ├── esp1.ino                            # developed code for esp32 1
+    │   ├── esp3.ino                            # developed code for esp32 2
+    │   └── esp4.ino                            # developed code for esp32 3
+    └── python                            # developed python code
+        └── AutoBerlindes.py                    # developed orchuestration code
 ```
 ## <div align="center">Contribution Guidelines</div>
 NOVA RICS Open Lab open source, and we welcome contributions from the community! See the [Contribution](CONTRIBUTING.md) guide for more information on the development workflow and the internals of the wandb library. For project related bugs and feature requests, visit [GitHub Issues](https://github.com/NOVA-RICS-Open-Lab/open-modular-controller/issues) or contact novaricsopenlab@gmail.com

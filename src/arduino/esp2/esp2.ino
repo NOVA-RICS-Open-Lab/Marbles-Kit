@@ -25,9 +25,9 @@
 #define SSID ""
 #define PASSWORD ""
 
-IPAddress local_IP(192, 168, 1, 1);  // Set your Static IP address
+IPAddress local_IP(192, 168, 13, 2);  // Set your Static IP address
 IPAddress gateway(192, 168, 1, 1);    // Set your Gateway IP address
-IPAddress subnet(255, 255, 13, 2);
+IPAddress subnet(255, 255, 0, 0);
 
 WebServer server(8009);
 
