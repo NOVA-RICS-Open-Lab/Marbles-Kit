@@ -43,9 +43,44 @@ Follow these steps to set up your ESP:
       The SSID and Password for the wifi network also need to be specified along with his static IP. ESP code lack this elements
 
 3. **Gather Components**
-   - The test was conducted using an ESP32 DEVKIT V1.
+   
+   The test was conducted using an ESP32 DEVKIT V1.
 
-4. **Service Identification**
+4. **Connect to Kit**
+
+   The modular controller needs to be connected to the industrial marbles kit.
+   We numbered the connections in order to have some organization and ease of documentaion.
+
+   <div align="center">
+
+   | ESP | Port | Value | Function |
+   | :--- | :--- | :--- | :--- |
+   | 1 | 1 | High | T1 Clockwise |
+   | 1 | 2 | High | T1 Anticlockwise |
+   | 1 | 3 | High | G1 Open |
+   | 1 | 3 | Low | G1 Close |
+   | 1 | 4 | High | G1 Down |
+   | 1 | 4 | Low | G1 Up |
+   | 2 | 5 | High | G2 Front |
+   | 2 | 5 | Low | G2 Back |
+   | 2 | 6 | High | G2 Down |
+   | 2 | 6 | Low | G2 Up |
+   | 2 | 7 | High | G2 middle on |
+   | 2 | 7 | Low | G2 middle off |
+   | 2 | 8 | High | T2 Front |
+   | 2 | 9 | High | T2 Back |
+   | 2 | 10 | High | G2 Grab |
+   | 2 | 10 | Low | G2 Release |
+   | 3 | 11 | High | G3 Up |
+   | 3 | 12 | High | G3 Down |
+   | 3 | 13 | High | G3 Open |
+   | 3 | 14 | High | G3 Close |
+   | 3 | 15 | High | G3 Rotate Clockwise |
+   | 3 | 16 | High | G3 Rotate Anticlockwise |
+
+   </div>
+
+5. **Service Identification**
    - Each controller board is able to support 7 actuators and 7 sensors, having this in mind, define how many controllers you will need and what services you want them to provide.
    - Once you have identified the services, you can code their handlers using as example the code snipet below.
 
@@ -55,8 +90,7 @@ Follow these steps to set up your ESP:
    
       More on this can be found on any ESP32 code provided.
 
-
-5. **Test Services**
+6. **Test Services**
    - Test your Services using a browser or any other application. (We recomend Postman)
 
 If everything goes well, congratulations! You have implemented a functional services based industrial system.
